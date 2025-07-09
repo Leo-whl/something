@@ -1,0 +1,119 @@
+{
+  "name": "Step_Moter_FOC_Study",
+  "type": "RISC-V",
+  "dependenceList": [],
+  "srcDirs": [
+    "src",
+    "sdk",
+    "Diver",
+    "Algorithm"
+  ],
+  "virtualFolder": {
+    "name": "<virtual_root>",
+    "files": [],
+    "folders": []
+  },
+  "outDir": "build",
+  "deviceName": null,
+  "packDir": null,
+  "miscInfo": {
+    "uid": "7831a1359fa685b211fcc5f82dfb59af"
+  },
+  "targets": {
+    "Debug": {
+      "excludeList": [
+        "Startup/startup_ch32v30x_D8.S",
+        "sdk/Startup/startup_ch32v20x_D8W.S",
+        "sdk/Startup/startup_ch32v20x_D8.S"
+      ],
+      "toolchain": "RISCV_GCC",
+      "compileConfig": {
+        "linkerScriptPath": "",
+        "options": "null"
+      },
+      "uploader": "Custom",
+      "uploadConfig": {
+        "bin": "${ExecutableName}.bin",
+        "commandLine": "D:\\MounRiver\\MounRiver_Studio\\toolchain\\OpenOCD\\bin\\openocd.exe -f D:\\CH32-Project\\Step_Moter_FOC_Study\\tools\\wch-target.cfg  -c page_erase  -c init -c halt  -c \"flash write_image  D:\\\\CH32-Project\\\\Step_Moter_FOC_Study\\\\build\\\\Debug\\\\Step_Moter_FOC_Study.bin\"   -c exit",
+        "eraseChipCommand": ""
+      },
+      "uploadConfigMap": {
+        "JLink": {
+          "bin": "",
+          "baseAddr": "0x08000000",
+          "cpuInfo": {
+            "vendor": "ST",
+            "cpuName": "STM32F103C8"
+          },
+          "proType": 1,
+          "speed": 8000,
+          "otherCmds": ""
+        },
+        "OpenOCD": {
+          "bin": "",
+          "target": "${workspaceFolder}/tools/wch-target",
+          "interface": "${workspaceFolder}/tools/wch-target",
+          "baseAddr": "0x08000000"
+        },
+        "Custom": {
+          "bin": "${ExecutableName}.bin",
+          "commandLine": "D:\\MounRiver\\MounRiver_Studio\\toolchain\\OpenOCD\\bin\\openocd.exe -f D:\\CH32-Project\\Step_Moter_FOC_Study\\tools\\wch-target.cfg  -c page_erase  -c init -c halt  -c \"flash write_image  D:\\\\CH32-Project\\\\Step_Moter_FOC_Study\\\\build\\\\Debug\\\\Step_Moter_FOC_Study.bin\"   -c exit",
+          "eraseChipCommand": ""
+        }
+      },
+      "custom_dep": {
+        "name": "default",
+        "incList": [
+          "sdk/Peripheral/inc",
+          "src",
+          "sdk/Core",
+          "sdk/Debug",
+          "Diver",
+          "Algorithm"
+        ],
+        "libList": [],
+        "defineList": []
+      },
+      "builderOptions": {
+        "RISCV_GCC": {
+          "version": 2,
+          "beforeBuildTasks": [],
+          "afterBuildTasks": [
+            {
+              "name": "elf_to_lst",
+              "disable": false,
+              "abortAfterFailed": false,
+              "command": "riscv-none-embed-objdump --source --all-headers --demangle --disassemble \"${OutDir}\\${targetName}.elf\" > \"${OutDir}\\${targetName}.lst\""
+            }
+          ],
+          "global": {
+            "output-debug-info": "enable",
+            "arch": "rv32imac",
+            "abi": "ilp32",
+            "code-model": "medany",
+            "misc-control": "-msmall-data-limit=8 -msave-restore -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -fno-common -Wunused -Wuninitialized --specs=nano.specs --specs=nosys.specs"
+          },
+          "c/cpp-compiler": {
+            "language-c": "c17",
+            "language-cpp": "c++17",
+            "optimization": "level-size",
+            "warnings": "all-warnings",
+            "one-elf-section-per-function": true,
+            "one-elf-section-per-data": true,
+            "C_FLAGS": "-Wl,-Bstatic"
+          },
+          "asm-compiler": {
+            "ASM_FLAGS": "-Wl,-Bstatic"
+          },
+          "linker": {
+            "output-format": "elf",
+            "remove-unused-input-sections": true,
+            "LD_FLAGS": "-Xlinker --gc-sections -nostartfiles -T \"sdk/Ld/Link.ld\"",
+            "$toolName": "auto"
+          }
+        }
+      }
+    }
+  },
+  "version": "3.5"
+}
